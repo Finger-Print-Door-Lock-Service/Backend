@@ -21,4 +21,8 @@ public class Member extends BaseEntity {
 
     @Column(name = "email", nullable = false)
     private String email;
+
+    @ManyToOne
+    @JoinColumn(name = "device_id")
+    private Device device;
 }

@@ -7,6 +7,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @NoArgsConstructor
@@ -31,4 +34,18 @@ public class Device extends BaseEntity {
 
     @Column(name = "password")
     private String password;
+
+    @OneToMany(mappedBy = "device",
+                fetch = FetchType.LAZY,
+                cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+                            CascadeType.REMOVE, CascadeType.REFRESH})
+    private List<Member> members;
+
+    public void addMember(Member member) {
+        if(members == null) {
+            members = new ArrayList<Member>();
+        }
+
+        members.add(member);
+    }
 }

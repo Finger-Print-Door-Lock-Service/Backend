@@ -30,6 +30,6 @@ public class PrincipalDetails implements UserDetails {
     // 이메일 로그인
     @Override
     public String getUsername() {
-        return device.getEmail();
+        return device.getMacAddress();
     }
 }

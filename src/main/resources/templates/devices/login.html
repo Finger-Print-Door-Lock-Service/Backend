@@ -89,11 +89,11 @@
 <div class="container">
     <h2>기기 로그인</h2>
 
-    <form th:action="@{/login}" method="post">
-        <label for="deviceId">기기 ID</label>
-        <input type="text" id="deviceId" name="username" placeholder="예: doorlock001" required>
+    <form th:action="@{/device-login}" method="post">
+        <label for="deviceId">기기 MAC 주소</label>
+        <input type="text" id="deviceId" name="username" placeholder="예: 84:F3:EB:12:34:56" required>
 
-        <label for="password" style="margin-top: 1rem;">비밀번호</label>
+        <label for="password" style="margin-top: 1rem;">기기 비밀번호</label>
         <input type="password" id="password" name="password" placeholder="********" required>
 
         <button type="submit">로그인</button>

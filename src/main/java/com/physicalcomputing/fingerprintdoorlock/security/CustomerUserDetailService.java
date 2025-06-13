@@ -15,8 +15,8 @@ public class CustomerUserDetailService implements UserDetailsService {
     private final DeviceService deviceService;
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Device device = deviceService.getDeviceByEmail(email);
+    public UserDetails loadUserByUsername(String macAddress) throws UsernameNotFoundException {
+        Device device = deviceService.getDeviceByMacAddress(macAddress);
         if(device == null) {
             throw new UsernameNotFoundException("Device not found");
         }

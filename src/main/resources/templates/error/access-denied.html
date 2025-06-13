@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>접근 거부됨</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f2f6fb;
+      color: #333;
+      margin: 0;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .box {
+      background-color: #ffffff;
+      max-width: 420px;
+      margin: auto;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #3A86FF;
+      font-size: 2rem;
+    }
+
+    p {
+      margin-top: 1rem;
+      font-size: 1rem;
+      color: #555;
+    }
+
+    a.button {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #3A86FF;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.2s ease-in-out;
+    }
+
+    a.button:hover {
+      background-color: #2e6fcc;
+    }
+  </style>
+</head>
+<body>
+<div class="box">
+  <h1>🚫 접근이 거부되었습니다</h1>
+  <p>이 페이지에 접근할 권한이 없습니다.</p>
+  <a href="/" class="button">홈으로 돌아가기</a>
+</div>
+</body>
+</html>

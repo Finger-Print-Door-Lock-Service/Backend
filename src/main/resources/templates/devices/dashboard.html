@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>기기 대시보드</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f8fc;
+      margin: 0;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 480px;
+      margin: auto;
+      background-color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      box-sizing: border-box;
+    }
+
+    h2 {
+      color: #3A86FF;
+      margin-bottom: 2rem;
+    }
+
+    .button {
+      display: block;
+      width: 100%;
+      padding: 1rem;
+      margin-top: 1rem;
+      font-size: 1.1rem;
+      background-color: #3A86FF;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.2s ease-in-out;
+
+      box-sizing: border-box;
+    }
+
+    .button:hover {
+      background-color: #2e6fcc;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>기기 대시보드</h2>
+
+  <a href="/fingerprint/register" class="button">🖐️ 지문 등록</a>
+  <a href="/logs" class="button">📄 로그 보기</a>
+</div>
+
+</body>
+</html>
