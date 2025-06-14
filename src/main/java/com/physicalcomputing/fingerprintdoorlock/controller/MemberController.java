@@ -1,7 +1,6 @@
 package com.physicalcomputing.fingerprintdoorlock.controller;
 
 import com.physicalcomputing.fingerprintdoorlock.domain.dto.ArduinoDTO;
-import com.physicalcomputing.fingerprintdoorlock.repository.MemberRepository;
 import com.physicalcomputing.fingerprintdoorlock.security.PrincipalDetails;
 import com.physicalcomputing.fingerprintdoorlock.service.memberService.MemberService;
 import lombok.RequiredArgsConstructor;
