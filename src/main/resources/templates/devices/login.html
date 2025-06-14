@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기기 로그인 및 등록</title>
+    <style>
+        :root {
+            --main-blue: #3A86FF;
+            --light-blue: #E0F0FF;
+            --border-color: #B3D4FC;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            padding: 1.5rem;
+            margin: 0;
+            background-color: #f9fbfd;
+            color: #333;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        h2 {
+            text-align: center;
+            color: var(--main-blue);
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 0.75rem;
+            margin-top: 0.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--main-blue);
+            color: white;
+            font-size: 1rem;
+            border: none;
+            border-radius: 8px;
+            margin-top: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2e6fcc;
+        }
+
+        .info-box {
+            display: none;
+            background-color: var(--light-blue);
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .info-box ol {
+            padding-left: 1.2rem;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 1rem;
+            }
+
+            .container {
+                padding: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>기기 로그인</h2>
+
+    <form th:action="@{/device-login}" method="post">
+        <label for="deviceId">기기 MAC 주소</label>
+        <input type="text" id="deviceId" name="username" placeholder="예: 84:F3:EB:12:34:56" required>
+
+        <label for="password" style="margin-top: 1rem;">기기 비밀번호</label>
+        <input type="password" id="password" name="password" placeholder="********" required>
+
+        <button type="submit">로그인</button>
+    </form>
+
+    <button type="button" onclick="toggleInfo()">기기 등록 안내 보기</button>
+
+    <div id="registerInfo" class="info-box">
+        <h4>📡 기기 등록 방법</h4>
+        <ol>
+            <li>휴대폰의 Wi-Fi를 <strong>ESP32의 SoftAP</strong> (예: <code>ESP32-Setup</code>)에 연결하세요.</li>
+            <li>브라우저 주소창에 <code>192.168.4.1</code>을 입력하여 등록 페이지에 접속합니다.</li>
+            <li>와이파이 정보 및 기기 ID, 비밀번호를 입력하여 등록하세요.</li>
+            <li>다시 원래 Wi-Fi에 연결한 후 이 로그인 페이지에서 로그인하면 됩니다.</li>
+        </ol>
+    </div>
+</div>
+
+<script>
+    function toggleInfo() {
+        const box = document.getElementById("registerInfo");
+        box.style.display = box.style.display === "block" ? "none" : "block";
+    }
+</script>
+
+</body>
+</html>
