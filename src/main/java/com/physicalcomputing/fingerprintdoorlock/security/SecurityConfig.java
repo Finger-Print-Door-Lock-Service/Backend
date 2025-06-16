@@ -17,12 +17,12 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(configurer ->
                         configurer
-                                .requestMatchers("/", "/device", "/members/**", "/mqtt/send").permitAll()
+                                .requestMatchers("/dashboard", "/devices", "/members/**", "/mqtt/send").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .formLogin(form ->
                         form
-                                .loginPage("/")
+                                .loginPage("/devices")
                                 .loginProcessingUrl("/device-login")
                                 .defaultSuccessUrl("/dashboard", true)
                                 .failureUrl("/?error=true")

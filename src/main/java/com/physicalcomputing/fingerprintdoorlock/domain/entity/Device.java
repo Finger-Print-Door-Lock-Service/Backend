@@ -18,10 +18,15 @@ import java.util.List;
 @Builder
 public class Device extends BaseEntity {
 
+    public static int howManyMembers = 0;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "device_id")
     private long deviceId;
+
+    @Column(name = "device_id_for_user")
+    private int deviceIdForMqwtt;
 
     @Column(name = "name")
     private String name;
@@ -45,7 +50,6 @@ public class Device extends BaseEntity {
         if(members == null) {
             members = new ArrayList<Member>();
         }
-
         members.add(member);
     }
 }

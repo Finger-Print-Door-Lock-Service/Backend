@@ -41,12 +41,14 @@ public class DeviceServiceImpl implements DeviceService{
         String name = deviceRegisterDTO.getName();
         String email = deviceRegisterDTO.getEmail();
         String password = passwordEncoder.encode(deviceRegisterDTO.getPassword());
+        int deviceIdForMqtt = deviceRegisterDTO.getDeviceIdForMqtt();
 
         Device device = Device.builder()
                 .name(name)
                 .macAddress(macAddress)
                 .email(email)
                 .password(password)
+                .deviceIdForMqwtt(deviceIdForMqtt)
                 .build();
 
         deviceRepository.save(device);

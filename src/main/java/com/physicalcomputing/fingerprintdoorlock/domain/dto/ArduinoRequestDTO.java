@@ -10,6 +10,6 @@ public class ArduinoRequestDTO {
     @NoArgsConstructor
     @Builder
     public static class DeviceRegisterDTO {
-        private int deviceNumForMqtt;
+        private int deviceIdForMqtt;
     }
 }

@@ -61,19 +61,46 @@
 
 <div class="container">
   <h2>회원 등록</h2>
-  <form th:action="@{/member/register}" method="post" th:object="${member}">
+  <form id="registerForm">
     <label for="name">이름</label>
-    <input type="text" id="name" th:field="*{name}" placeholder="홍길동" required>
+    <input type="text" id="name" placeholder="홍길동" required>
 
     <label for="email">이메일</label>
-    <input type="email" id="email" th:field="*{email}" placeholder="user@example.com" required>
-
-    <label for="password">비밀번호</label>
-    <input type="password" id="password" th:field="*{password}" placeholder="비밀번호" required>
+    <input type="email" id="email" placeholder="user@example.com" required>
 
     <button type="submit">등록</button>
   </form>
 </div>
+
+<script>
+  document.getElementById("registerForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+
+    // 1. Spring → ESP32: 지문 인식 요청 (MQTT Publish)
+    const response = await fetch("/fingerprint", { method: "POST" });
+
+    if (!response.ok) {
+      alert("❌ 지문 인식 요청 실패");
+      return;
+    }
+
+    alert("🖐️ 손가락을 올려 지문을 인식해주세요...");
+
+    // 2. ESP32가 지문 인식 완료 후 HTTP로 Spring에 아래 내용 전송
+    // 이건 ESP32 코드에서 처리됨:
+    // {
+    //   name: "홍길동",
+    //   email: "abc@example.com",
+    //   fingerprintId: 7
+    // }
+
+    // 이 시점에서는 폼 제출은 프론트에서 안 하고,
+    // ESP32가 `/members`로 직접 POST
+  });
+</script>
 
 </body>
 </html>

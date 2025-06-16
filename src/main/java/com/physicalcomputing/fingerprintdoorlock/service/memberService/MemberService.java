@@ -5,5 +5,5 @@ import com.physicalcomputing.fingerprintdoorlock.domain.entity.Device;
 
 public interface MemberService {
 
-    void registerMember(Device device, ArduinoDTO.MemberRegisterDTO memberRegisterDTO);
+    void registerMember(Device device, ArduinoDTO.MemberRegisterDTO memberRegisterDTO, ArduinoDTO.MemberInfoOnDeviceDTO memberInfoOnDeviceDTO);
 }

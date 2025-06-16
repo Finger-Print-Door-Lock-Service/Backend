@@ -15,6 +15,7 @@ public class ArduinoDTO {
         private  String name;
         private  String email;
         private  String password;
+        private int deviceIdForMqtt;
     }
 
     @Getter
@@ -27,5 +28,12 @@ public class ArduinoDTO {
         private String email;
     }
 
-
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Builder
+    public static class MemberInfoOnDeviceDTO{
+        private int memberIdOnDevice;
+    }
 }
