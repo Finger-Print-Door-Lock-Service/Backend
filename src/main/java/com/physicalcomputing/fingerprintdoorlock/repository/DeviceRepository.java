@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface DeviceRepository extends JpaRepository<Device, Long> {
     Optional<Device> findByEmail(String email);
     Optional<Device> findByMacAddress(String macAddress);
+    Optional<Device> findByDeviceIdForMqtt(int deviceIdForMqtt);
 }

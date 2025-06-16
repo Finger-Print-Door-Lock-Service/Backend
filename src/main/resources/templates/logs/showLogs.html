@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>로그 목록</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f8fc;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background-color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #3A86FF;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    th, td {
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+
+    th {
+      background-color: #3A86FF;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    a.back {
+      display: block;
+      margin-top: 1.5rem;
+      text-align: center;
+      color: #3A86FF;
+      text-decoration: none;
+    }
+
+    a.back:hover {
+      text-decoration: underline;
+    }
+
+    /* 반응형 스타일 */
+    @media (max-width: 600px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+        width: 100%;
+      }
+
+      thead {
+        display: none;
+      }
+
+      tr {
+        margin-bottom: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 0.5rem;
+        background-color: #fff;
+      }
+
+      td {
+        text-align: right;
+        position: relative;
+        padding-left: 50%;
+        border: none;
+        border-bottom: 1px solid #eee;
+      }
+
+      td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        font-weight: bold;
+        color: #555;
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2>📄 기기 로그</h2>
+
+  <table>
+    <thead>
+    <tr>
+      <th>멤버 ID</th>
+      <th>결과</th>
+      <th>시간</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="log : ${logs}">
+      <td data-label="멤버 ID" th:text="${log.memberIdOnDevice}">1</td>
+      <td data-label="결과" th:text="${log.result} ? '성공' : '실패'">성공</td>
+      <td data-label="시간" th:text="${#temporals.format(log.timestamp, 'yyyy-MM-dd HH:mm:ss')}">2025-06-16 10:00:00</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <a href="/devices/dashboard" class="back">← 대시보드로 돌아가기</a>
+</div>
+</body>
+</html>

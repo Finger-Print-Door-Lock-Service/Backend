@@ -26,7 +26,7 @@ public class Device extends BaseEntity {
     private long deviceId;
 
     @Column(name = "device_id_for_user")
-    private int deviceIdForMqwtt;
+    private int deviceIdForMqtt;
 
     @Column(name = "name")
     private String name;

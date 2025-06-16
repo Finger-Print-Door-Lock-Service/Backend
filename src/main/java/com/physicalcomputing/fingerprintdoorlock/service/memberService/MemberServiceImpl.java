@@ -14,6 +14,13 @@ public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
 
     @Override
+    public Member getMemberByMemberIdOnDevice(int memberIdOnDevice) {
+        Member member = memberRepository.findByMemberIdOnDevice(memberIdOnDevice)
+                .orElseThrow(() -> new IllegalArgumentException("Member not found"));
+        return member;
+    }
+
+    @Override
     public void registerMember(Device device, ArduinoDTO.MemberRegisterDTO memberRegisterDTO, ArduinoDTO.MemberInfoOnDeviceDTO memberInfoOnDeviceDTO) {
 
         String name = memberRegisterDTO.getName();
