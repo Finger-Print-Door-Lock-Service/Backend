@@ -26,4 +26,6 @@ public class ArduinoDTO {
         private String name;
         private String email;
     }
+
+
 }
