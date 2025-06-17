@@ -44,6 +44,9 @@ dependencies {
 
 	// firebase
 	implementation 'com.google.firebase:firebase-admin:9.2.0'
+
+	// smtp
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
 }
 
 tasks.named('test') {
