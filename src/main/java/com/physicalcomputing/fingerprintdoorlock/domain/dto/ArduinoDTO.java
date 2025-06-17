@@ -34,6 +34,28 @@ public class ArduinoDTO {
     @NoArgsConstructor
     @Builder
     public static class MemberInfoOnDeviceDTO{
+        private String name;
+        private String email;
+    }
+
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Builder
+    public static class MemberIdOnDeviceDTO{
+        private int memberIdOnDevice;
+        private int deviceIdForMqtt;
+    }
+
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Builder
+    public static class MemberInfoCombinedDTO{
+        private String name;
+        private String email;
         private int memberIdOnDevice;
     }
 }

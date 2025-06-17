@@ -21,11 +21,11 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void registerMember(Device device, ArduinoDTO.MemberRegisterDTO memberRegisterDTO, ArduinoDTO.MemberInfoOnDeviceDTO memberInfoOnDeviceDTO) {
+    public void registerMember(Device device, ArduinoDTO.MemberInfoCombinedDTO memberInfoCombinedDTO) {
 
-        String name = memberRegisterDTO.getName();
-        String email = memberRegisterDTO.getEmail();
-        int memberIdOnDevice = memberInfoOnDeviceDTO.getMemberIdOnDevice();
+        String name = memberInfoCombinedDTO.getName();
+        String email = memberInfoCombinedDTO.getEmail();
+        int memberIdOnDevice = memberInfoCombinedDTO.getMemberIdOnDevice();
 
         Member member = Member.builder()
                 .memberIdOnDevice(memberIdOnDevice) // 나중에 로그를 위해서 저장하는 것

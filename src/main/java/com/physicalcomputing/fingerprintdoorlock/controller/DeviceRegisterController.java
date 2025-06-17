@@ -26,16 +26,19 @@ public class DeviceRegisterController {
 
     // 이 버튼은 db 저장용이 아니라 mqtt 연결용입니다.
     @PostMapping("/mqtt")
-    public void registerDevicesForMqtt(@ModelAttribute ArduinoRequestDTO.DeviceRegisterDTO deviceRegisterDTO) {
+    public String registerDevicesForMqtt(@ModelAttribute ArduinoRequestDTO.DeviceRegisterDTO deviceRegisterDTO) {
         int deviceNumForMqtt = deviceRegisterDTO.getDeviceIdForMqtt();
         String topic = "fingerprint/" + deviceNumForMqtt;
         // 기기 등록용 요청 번호 1000
         mqttService.publish(topic, "1000");
+        return "redirect:/devices/";
     }
 
     // esp 32에서 등록 완료 후 -> spring (db 등록을 위해서)
     @PostMapping("/device")
+    @ResponseBody
     public void registerDevice(@RequestBody ArduinoDTO.DeviceRegisterDTO deviceRegisterDTO) {
         deviceService.registerDevice(deviceRegisterDTO);
+        System.out.println("Device registered");
     }
 }

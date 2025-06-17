@@ -71,8 +71,24 @@
 <div class="container">
   <h2>기기 대시보드</h2>
 
-  <a href="/members/register" class="button">🖐️ 지문 등록</a>
-  <a href="/logs/showLogs" class="button">📄 로그 보기</a>
+  <a th:href="@{/members}" class="button">🖐️ 지문 등록</a>
+  <a th:href="@{/logs/myLogs}" class="button">📄 로그 보기</a>
+  <button id="openDoorBtn" class="button">🔓 문 열기</button>
+
+  <script>
+    document.getElementById('openDoorBtn').addEventListener('click', async () => {
+      try {
+        await fetch('/door', {
+          method: 'POST',
+          credentials: 'same-origin'   // 세션 쿠키만 전송, CSRF 없음
+        });
+        alert('문이 열렸습니다!');
+      } catch (err) {
+        alert('문 열기에 실패했습니다.');
+        console.error(err);
+      }
+    });
+  </script>
 </div>
 
 </body>

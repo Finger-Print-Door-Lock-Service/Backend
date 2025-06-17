@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <title>지문 등록 대기</title>
+    <style>
+        body{font-family:'Segoe UI',sans-serif;background:#f4f8fc;margin:0;padding:2rem;text-align:center}
+        .box{max-width:480px;margin:auto;background:#fff;padding:2rem;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+        h2{color:#3A86FF}
+        .spin{margin:2rem auto;width:40px;height:40px;border:5px solid #ccc;border-top:5px solid #3A86FF;border-radius:50%;animation:spin 1s linear infinite}
+        @keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+    </style>
+</head>
+<body>
+<div class="box">
+    <h2>지문 등록 중...</h2>
+    <div class="spin"></div>
+    <p>손가락을 센서에 대 주세요.</p>
+</div>
+
+<script>
+    function poll() {
+        fetch("/members/fingerprint/status")
+            .then(r => r.json())
+            .then(done => {
+                if (done) {
+                    window.location.href = "/dashboard";
+                } else {
+                    setTimeout(poll, 1000);
+                }
+            })
+            .catch(() => setTimeout(poll, 3000));
+    }
+    poll();
+</script>
+</body>
+</html>
