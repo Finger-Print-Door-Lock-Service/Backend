@@ -1,79 +1,60 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
   <title>회원 등록</title>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      padding: 2rem;
-      background-color: #f4f8fc;
-    }
-
-    .container {
-      max-width: 480px;
-      margin: auto;
-      background-color: white;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    }
-
-    h2 {
-      text-align: center;
-      color: #3A86FF;
-    }
-
-    label {
-      display: block;
-      margin-top: 1rem;
-      font-weight: bold;
-    }
-
-    input {
-      width: 100%;
-      padding: 0.7rem;
-      margin-top: 0.3rem;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      box-sizing: border-box;
-    }
-
-    button {
-      margin-top: 2rem;
-      width: 100%;
-      padding: 0.75rem;
-      background-color: #3A86FF;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #2e6fcc;
-    }
+    body{font-family:'Segoe UI',sans-serif;padding:2rem;background:#f4f8fc}
+    .container{max-width:480px;margin:auto;background:#fff;padding:2rem;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+    h2{text-align:center;color:#3A86FF}
+    label{display:block;margin-top:1rem;font-weight:bold}
+    input{width:100%;padding:.7rem;margin-top:.3rem;border:1px solid #ccc;border-radius:6px;box-sizing:border-box}
+    button{margin-top:2rem;width:100%;padding:.75rem;background:#3A86FF;color:#fff;border:none;border-radius:8px;font-size:1rem;cursor:pointer}
+    button:hover{background:#2e6fcc}
   </style>
 </head>
 <body>
-
 <div class="container">
   <h2>회원 등록</h2>
-  <form th:action="@{/member/register}" method="post" th:object="${member}">
+
+  <!-- ★ id 로만 사용 : 서버엔 Ajax 로 보냄 -->
+  <form id="registerForm">
     <label for="name">이름</label>
-    <input type="text" id="name" th:field="*{name}" placeholder="홍길동" required>
+    <input type="text" id="name" placeholder="홍길동" required>
 
     <label for="email">이메일</label>
-    <input type="email" id="email" th:field="*{email}" placeholder="user@example.com" required>
+    <input type="email" id="email" placeholder="user@example.com" required>
 
-    <label for="password">비밀번호</label>
-    <input type="password" id="password" th:field="*{password}" placeholder="비밀번호" required>
-
-    <button type="submit">등록</button>
+    <button type="submit">지문 등록 요청</button>
   </form>
+
+  <p id="statusMessage" style="text-align:center;margin-top:1rem;"></p>
 </div>
 
+<script>
+  document.getElementById("registerForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const name   = document.getElementById("name").value;
+    const email  = document.getElementById("email").value;
+    const status = document.getElementById("statusMessage");
+
+    status.innerText = "지문 등록 요청 중... 손가락을 센서에 대 주세요.";
+
+    try {
+      const res = await fetch("/members/fingerprint", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email })
+      });
+
+      if (!res.ok) throw new Error();
+      /* 지문 대기 화면으로 이동 */
+      window.location.href = "/members/wait";
+    } catch (err) {
+      status.innerText = "❌ 등록 요청 실패";
+    }
+  });
+</script>
 </body>
 </html>

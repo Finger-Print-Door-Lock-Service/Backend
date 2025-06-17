@@ -36,17 +36,27 @@ public class DeviceServiceImpl implements DeviceService{
     }
 
     @Override
+    public Device getDeviceByDeviceIdForMqtt(int deviceIdForMqtt) {
+        Device device = deviceRepository.findByDeviceIdForMqtt(deviceIdForMqtt)
+                .orElseThrow(() -> new IllegalArgumentException("Device not found"));
+        return device;
+    }
+
+
+    @Override
     public void registerDevice(ArduinoDTO.DeviceRegisterDTO deviceRegisterDTO) {
         String macAddress = deviceRegisterDTO.getMacAddress();
         String name = deviceRegisterDTO.getName();
         String email = deviceRegisterDTO.getEmail();
         String password = passwordEncoder.encode(deviceRegisterDTO.getPassword());
+        int deviceIdForMqtt = deviceRegisterDTO.getDeviceIdForMqtt();
 
         Device device = Device.builder()
                 .name(name)
                 .macAddress(macAddress)
                 .email(email)
                 .password(password)
+                .deviceIdForMqtt(deviceIdForMqtt)
                 .build();
 
         deviceRepository.save(device);

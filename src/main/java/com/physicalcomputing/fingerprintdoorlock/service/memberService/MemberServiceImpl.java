@@ -14,12 +14,21 @@ public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
 
     @Override
-    public void registerMember(Device device, ArduinoDTO.MemberRegisterDTO memberRegisterDTO) {
+    public Member getMemberByMemberIdOnDevice(int memberIdOnDevice) {
+        Member member = memberRepository.findByMemberIdOnDevice(memberIdOnDevice)
+                .orElseThrow(() -> new IllegalArgumentException("Member not found"));
+        return member;
+    }
 
-        String name = memberRegisterDTO.getName();
-        String email = memberRegisterDTO.getEmail();
+    @Override
+    public void registerMember(Device device, ArduinoDTO.MemberInfoCombinedDTO memberInfoCombinedDTO) {
+
+        String name = memberInfoCombinedDTO.getName();
+        String email = memberInfoCombinedDTO.getEmail();
+        int memberIdOnDevice = memberInfoCombinedDTO.getMemberIdOnDevice();
 
         Member member = Member.builder()
+                .memberIdOnDevice(memberIdOnDevice) // 나중에 로그를 위해서 저장하는 것
                 .name(name)
                 .email(email)
                 .build();
@@ -27,6 +36,9 @@ public class MemberServiceImpl implements MemberService {
         // device and member bi-directional link
         device.addMember(member);
         member.setDevice(device);
+
+        // 등록했을때 디바이스에 등록된 멤버의 수도 1 증가 시켜줘야함
+        Device.howManyMembers++;
 
         memberRepository.save(member);
     }
